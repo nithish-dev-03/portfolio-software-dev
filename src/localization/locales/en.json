@@ -1,0 +1,195 @@
+{
+  "navbar": {
+    "home": "Home",
+    "about": "About",
+    "skills": "Skills",
+    "experience": "Experience",
+    "projects": "Projects",
+    "services": "Services",
+    "contact": "Contact",
+    "toggleTheme": "Toggle Theme",
+    "selectLanguage": "Select Language"
+  },
+  "hero": {
+    "title": "Building Modern Web & Mobile Experiences",
+    "subtitle": "Software Developer with 2 years of experience building scalable web applications, Flutter mobile apps, and developer tools.",
+    "viewProjects": "View Projects",
+    "downloadResume": "Download Resume",
+    "contactMe": "Contact Me",
+    "experienceBadge": "2+ Years of Experience"
+  },
+  "about": {
+    "title": "About Me",
+    "subtitle": "My background, tech stack, and software engineering philosophy.",
+    "bio": "Hi, I'm Nirmal Sing Nithish N, a software developer with 2 years of professional experience specializing in modern web and mobile application development. I am passionate about creating clean, performant, and responsive user experiences.",
+    "experienceTitle": "2 Years Experience",
+    "experienceSubtitle": "Full Stack & Mobile developer designing scalable solutions with clean architectures.",
+    "strengthsTitle": "Core Strengths",
+    "strengths": {
+      "debugging": "Debugging complex applications",
+      "performance": "Performance optimization",
+      "responsive": "Responsive UI implementation",
+      "cleanArch": "Clean Architecture & reusable components",
+      "api": "API integration & state management"
+    }
+  },
+  "skills": {
+    "title": "Skills & Expertise",
+    "subtitle": "My technical toolkit categorized by domain and level of expertise.",
+    "categories": {
+      "frontend": "Frontend Development",
+      "backend": "Backend & API",
+      "mobile": "Mobile App Development",
+      "database": "Database Systems",
+      "devTools": "Developer Tools",
+      "softSkills": "Professional Strengths"
+    }
+  },
+  "experience": {
+    "title": "Experience Timeline",
+    "subtitle": "My professional path and core contributions over the years.",
+    "timeline": {
+      "role": "Software Developer",
+      "years": "2024 - Present (2 Years)",
+      "focus": "Focus Area",
+      "desc": "Leading end-to-end development of dynamic client solutions and highly responsive consumer products.",
+      "points": {
+        "react": "React Development: Building performant, state-driven user interfaces and multi-page platforms.",
+        "flutter": "Flutter Development: Crafting fluid native Android and iOS apps with clean, clean-state Dart architectures.",
+        "apis": "REST APIs: Architecting reliable backend gateways, authentication pipelines, and data sync layers.",
+        "state": "State Management: Implementing highly robust Redux, Redux Saga, and Redux Thunk flows.",
+        "debugging": "Debugging: Troubleshooting deep-rooted multi-threaded issues and frontend race conditions.",
+        "reviews": "Feature Development & Reviews: Delivering standard-compliant features and fostering team learning via code reviews."
+      }
+    }
+  },
+  "projects": {
+    "title": "Featured Project",
+    "subtitle": "A deep dive into one of my major open-source products.",
+    "tabix": {
+      "title": "Tabix Chrome Extension",
+      "tagline": "Productivity & Tab Management",
+      "desc": "Tabix is a lightweight tab management Chrome extension designed to help users efficiently organize, search, and manage browser tabs for improved productivity. It handles thousands of tabs smoothly with visual groups, fuzzy search, and lazy storage.",
+      "featuresTitle": "Key Features",
+      "features": {
+        "management": "Fuzzy-search and filters across open windows",
+        "groups": "Custom collections and one-click tab grouping",
+        "performance": "Hibernation patterns to save system memory",
+        "sync": "Cloud-ready profile or local storage state syncing"
+      },
+      "architectureTitle": "Architecture & Flow",
+      "architecture": "Engineered with a modular architecture leveraging Chrome's background service workers, clean storage pipelines, and React-based popup overlays.",
+      "technologiesTitle": "Technologies Used",
+      "buttons": {
+        "store": "Chrome Web Store",
+        "github": "View GitHub",
+        "demo": "Live Demo"
+      }
+    }
+  },
+  "github": {
+    "title": "GitHub Contribution & Activity",
+    "subtitle": "My public repositories, statistics, and daily software development commits.",
+    "stats": {
+      "contributions": "850+ Contributions",
+      "repositories": "35+ Repositories",
+      "stars": "120+ Stars",
+      "languages": "Top Languages",
+      "languagesList": "TypeScript, Dart, JavaScript, CSS",
+      "activity": "Activity Heatmap",
+      "popularRepo": "Popular Repositories",
+      "profileButton": "Explore GitHub Profile"
+    },
+    "repos": {
+      "tabix": "tabix-extension: Core React-based tab manager extension source.",
+      "flutterApps": "flutter-clean-architecture: Flutter boilerplate implementing standard design principles.",
+      "reactBoilerplate": "react-redux-saga-starter: High-end production setup for React apps."
+    }
+  },
+  "techStack": {
+    "title": "Visual Tech Stack",
+    "subtitle": "The primary software, frameworks, and utilities I leverage daily."
+  },
+  "services": {
+    "title": "Services I Offer",
+    "subtitle": "Delivering production-ready systems and high-fidelity user products.",
+    "list": {
+      "frontendDev": {
+        "title": "Frontend Development",
+        "desc": "Building fast, high-contrast, accessible web applications using React, TypeScript, and modern styling utilities."
+      },
+      "mobileApp": {
+        "title": "Mobile App Development",
+        "desc": "Creating fully native cross-platform mobile apps using Flutter and Dart with fluid responsive designs."
+      },
+      "backendApis": {
+        "title": "Backend APIs",
+        "desc": "Creating secure, scalable server applications and RESTful API endpoints with Node.js and Express."
+      },
+      "chromeExt": {
+        "title": "Chrome Extension Development",
+        "desc": "Developing secure, low-overhead browser extensions utilizing modern storage and event page workers."
+      },
+      "uiImpl": {
+        "title": "UI Implementation",
+        "desc": "Fidelity translation of Figma designs into clean, responsive Tailwind code complying with strict accessibility norms."
+      },
+      "perfOpt": {
+        "title": "Performance Optimization",
+        "desc": "Improving app boot times, memory overhead, code splitting, asset sizing, and layout rendering pipelines."
+      },
+      "bugFix": {
+        "title": "Debugging & Bug Fixing",
+        "desc": "Deep triaging of complex race conditions, state leakages, memory leaks, and styling edge cases."
+      }
+    }
+  },
+  "testimonials": {
+    "title": "Testimonials",
+    "subtitle": "What clients, founders, and engineering peers say about working with me.",
+    "item1": {
+      "quote": "Nirmal is an exceptional developer. His attention to detail, debugging speed, and clean code approach made him a highly valuable asset to our development cycle.",
+      "author": "Arun Kumar",
+      "role": "Engineering Lead, Startup Labs"
+    },
+    "item2": {
+      "quote": "Our Flutter application was delivered ahead of schedule with zero major bugs. Nirmal's mastery of Clean Architecture is evident in his structural layouts.",
+      "author": "Sarah Chen",
+      "role": "Product Manager, Apex Mobile"
+    },
+    "item3": {
+      "quote": "The Tabix Chrome Extension has transformed how our research team manages resources. Beautiful UI, extremely responsive, and extremely optimized.",
+      "author": "Rajesh Raman",
+      "role": "Founder, Productivity Tools"
+    }
+  },
+  "contact": {
+    "title": "Get in Touch",
+    "subtitle": "Let's collaborate on your next modern web or mobile application.",
+    "form": {
+      "name": "Your Name",
+      "email": "Email Address",
+      "message": "Message",
+      "sendButton": "Send Message",
+      "sending": "Sending...",
+      "successMessage": "Thank you! Your message has been sent successfully. I will get back to you shortly.",
+      "errorMessage": "Something went wrong. Please try again or reach out directly.",
+      "validation": {
+        "nameRequired": "Name is required",
+        "emailRequired": "Email is required",
+        "emailInvalid": "Please enter a valid email address",
+        "messageRequired": "Message is required"
+      }
+    },
+    "info": {
+      "location": "Location",
+      "locationVal": "Tamil Nadu, India",
+      "email": "Email Address"
+    }
+  },
+  "footer": {
+    "copyright": "© 2026 Nirmal Sing Nithish N. All rights reserved.",
+    "backToTop": "Back to Top",
+    "rights": "Crafted with passion using React, MUI, and Tailwind CSS."
+  }
+}
