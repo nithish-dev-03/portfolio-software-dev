@@ -91,9 +91,9 @@
     "title": "GitHub Contribution & Activity",
     "subtitle": "My public repositories, statistics, and daily software development commits.",
     "stats": {
-      "contributions": "850+ Contributions",
-      "repositories": "35+ Repositories",
-      "stars": "120+ Stars",
+      "contributions": "Contributions",
+      "repositories": "Repositories",
+      "stars": "Stars",
       "languages": "Top Languages",
       "languagesList": "TypeScript, Dart, JavaScript, CSS",
       "activity": "Activity Heatmap",
