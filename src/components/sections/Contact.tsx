@@ -36,7 +36,7 @@ export function Contact() {
 
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSending, setIsSending] = useState(false);
-  const [sendSuccess, setSendSuccess] = useState<boolean | null>(null);
+  const [sendSuccess, setSendSuccess] = useState<boolean | null | "coming_soon">(null);
 
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
@@ -70,19 +70,45 @@ export function Contact() {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validateForm()) return;
 
     setIsSending(true);
     setSendSuccess(null);
 
-    // Simulate standard asynchronous API fetch pipeline
+    // try {
+    //   const response = await fetch(`https://formsubmit.co/ajax/${SOCIALS.email}`, {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //       Accept: "application/json",
+    //     },
+    //     body: JSON.stringify({
+    //       name: form.name,
+    //       email: form.email,
+    //       message: form.message,
+    //       _subject: "Testing the protfolio message",
+    //     }),
+    //   });
+
+    //   if (response.ok) {
+    //     setSendSuccess(true);
+    //     setForm({ name: "", email: "", message: "" }); // reset
+    //   } else {
+    //     setSendSuccess(false);
+    //   }
+    // } catch (error) {
+    //   setSendSuccess(false);
+    // } finally {
+    //   setIsSending(false);
+    // }
+
+    // Coming soon implementation
     setTimeout(() => {
+      setSendSuccess("coming_soon");
       setIsSending(false);
-      setSendSuccess(true);
-      setForm({ name: "", email: "", message: "" }); // reset
-    }, 1500);
+    }, 1000);
   };
 
   return (
@@ -185,7 +211,7 @@ export function Contact() {
                 
                 {/* Form Feedback State */}
                 <AnimatePresence mode="wait">
-                  {sendSuccess && (
+                  {/* {sendSuccess === true && (
                     <motion.div
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: "auto" }}
@@ -195,7 +221,7 @@ export function Contact() {
                       <CheckCircle2 className="h-5 w-5 shrink-0" />
                       <span>{t("contact.form.successMessage")}</span>
                     </motion.div>
-                  )}
+                  )} */}
 
                   {sendSuccess === false && (
                     <motion.div
@@ -206,6 +232,18 @@ export function Contact() {
                     >
                       <AlertCircle className="h-5 w-5 shrink-0" />
                       <span>{t("contact.form.errorMessage")}</span>
+                    </motion.div>
+                  )}
+
+                  {sendSuccess === "coming_soon" && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      className="p-4 rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 text-sm flex items-start gap-2"
+                    >
+                      <AlertCircle className="h-5 w-5 shrink-0" />
+                      <span>{t("contact.form.comingSoon")}</span>
                     </motion.div>
                   )}
                 </AnimatePresence>

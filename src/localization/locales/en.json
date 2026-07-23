@@ -48,20 +48,43 @@
   "experience": {
     "title": "Experience Timeline",
     "subtitle": "My professional path and core contributions over the years.",
-    "timeline": {
-      "role": "Software Developer",
-      "years": "2024 - Present (2 Years)",
-      "focus": "Focus Area",
-      "desc": "Leading end-to-end development of dynamic client solutions and highly responsive consumer products.",
-      "points": {
-        "react": "React Development: Building performant, state-driven user interfaces and multi-page platforms.",
-        "flutter": "Flutter Development: Crafting fluid native Android and iOS apps with clean, clean-state Dart architectures.",
-        "apis": "REST APIs: Architecting reliable backend gateways, authentication pipelines, and data sync layers.",
-        "state": "State Management: Implementing highly robust Redux, Redux Saga, and Redux Thunk flows.",
-        "debugging": "Debugging: Troubleshooting deep-rooted multi-threaded issues and frontend race conditions.",
-        "reviews": "Feature Development & Reviews: Delivering standard-compliant features and fostering team learning via code reviews."
+    "items": [
+      {
+        "role": "Associate Engineer",
+        "company": "New Zealand Client",
+        "duration": "React Migration",
+        "desc": "Started my career as a web developer. Led a major project migrating from class components to functional components, with a strong focus on performance optimization.",
+        "tech": ["React", "JavaScript", "Optimization"]
+      },
+      {
+        "role": "Associate Engineer",
+        "company": "UAE & US Clients",
+        "duration": "Airways & Crypto",
+        "desc": "Developed a UAE-based airway project using React, vanilla JavaScript and GitLab. Later, contributed to a US crypto web app, navigating legacy code and complex stock/crypto market logic.",
+        "tech": ["Vanilla JS", "GitLab", "Legacy Code"]
+      },
+      {
+        "role": "Mobile Developer",
+        "company": "Hong Kong & Vietnam Exchanges",
+        "duration": "Cross-Platform Apps",
+        "desc": "Transitioned to mobile development for the crypto domain. Built and shipped Flutter-based mobile applications for international cryptocurrency exchanges.",
+        "tech": ["Flutter", "Dart", "Mobile"]
+      },
+      {
+        "role": "Independent Developer",
+        "company": "Chrome Web Store",
+        "duration": "Product Delivery",
+        "desc": "Built and published a Chrome extension that gained widespread adoption, giving me complete end-to-end experience in delivering an application to users.",
+        "tech": ["Chrome Extension", "End-to-End"]
+      },
+      {
+        "role": "Full Stack Learner",
+        "company": "Personal Projects",
+        "duration": "Present",
+        "desc": "Actively expanding my technical stack into backend development, learning and building projects using Node.js, Express, and MongoDB.",
+        "tech": ["Node.js", "Express", "MongoDB"]
       }
-    }
+    ]
   },
   "projects": {
     "title": "Featured Project",
@@ -174,6 +197,7 @@
       "sending": "Sending...",
       "successMessage": "Thank you! Your message has been sent successfully. I will get back to you shortly.",
       "errorMessage": "Something went wrong. Please try again or reach out directly.",
+      "comingSoon": "Coming Soon! This feature will be enabled in the upcoming days.",
       "validation": {
         "nameRequired": "Name is required",
         "emailRequired": "Email is required",
