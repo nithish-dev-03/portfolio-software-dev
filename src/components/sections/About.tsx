@@ -60,7 +60,7 @@ export function About() {
                 </div>
                 <div>
                   <span className="block text-3xl font-extrabold text-cyan-600 dark:text-cyan-400">
-                    15+
+                    5+
                   </span>
                   <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">
                     Projects Done

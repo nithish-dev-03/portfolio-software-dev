@@ -48,7 +48,7 @@ export function Navbar() {
               <Code2 className="h-5 w-5" />
             </div>
             <span className="font-sans text-lg font-bold tracking-tight text-slate-900 dark:text-white sm:block hidden">
-              Nirmal Sing
+              Nirmal Sing Nithish
             </span>
           </div>
 
