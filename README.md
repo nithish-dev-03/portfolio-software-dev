@@ -1,20 +1,64 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# 👨‍💻 Nirmal Sing Nithish N - Software Developer Portfolio
 
-# Run and deploy your AI Studio app
+A modern, high-performance portfolio website built to showcase my projects, skills, and open-source contributions. 
 
-This contains everything you need to run your app locally.
+Built with **React**, **TypeScript**, **Vite**, and **Tailwind CSS**, featuring a sleek glassmorphism UI, light/dark mode support, and live GitHub integration.
 
-View your app in AI Studio: https://ai.studio/apps/2c7eabab-67e1-4a3e-ac76-cb1d1001685f
+## ✨ Features
 
-## Run Locally
+- **Dynamic GitHub Integration**: Live fetching of public and private repository statistics, contribution heatmaps, and top programming languages using the GitHub REST API.
+- **Modern Tech Stack**: React, TypeScript, and Vite for lightning-fast HMR and optimized production builds.
+- **Responsive UI/UX**: Premium glassmorphism aesthetics, fluid typography, and custom webkit scrollbars tailored for both desktop and mobile devices.
+- **Theming**: Integrated seamless Light and Dark modes.
+- **Internationalization (i18n)**: Multi-language support structure using `react-i18next`.
 
-**Prerequisites:**  Node.js
+## 🚀 Getting Started
 
+### Prerequisites
+Make sure you have [Node.js](https://nodejs.org/) installed on your machine.
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+### Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/nithish-dev-03/portfolio-software-dev.git
+   cd portfolio-software-dev
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Configure Environment Variables (Optional but recommended):**
+   To display your private GitHub repositories and bypass strict API rate limits, create a `.env` file in the root directory and add a GitHub Personal Access Token (PAT):
+   ```env
+   VITE_GITHUB_TOKEN=github_pat_YOUR_TOKEN_HERE
+   ```
+   *(Note: Ensure your token has `repo` read permissions. If omitted, the app will gracefully default to fetching only public repositories).*
+
+4. **Start the development server:**
+   ```bash
+   npm run dev
+   ```
+
+5. **Build for production:**
+   ```bash
+   npm run build
+   ```
+
+## 🛠️ Tech Stack
+- **Frontend Framework**: React
+- **Build Tool**: Vite
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **Icons**: Lucide React
+- **Animations**: Framer Motion
+
+## 📬 Contact
+- **Email**: nirmalnithishdeveloper@gmail.com
+- **LinkedIn**: [Nirmal Sing Nithish N](https://linkedin.com/in/nirmal-sing-nithish-n)
+- **Location**: Tamil Nadu, India
+
+---
+*Designed & Developed by Nirmal Sing Nithish N*
