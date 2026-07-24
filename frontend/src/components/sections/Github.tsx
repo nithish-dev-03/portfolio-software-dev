@@ -1,123 +1,68 @@
-import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { SECTIONS } from "../../constants/routes";
 import { SOCIALS } from "../../constants/social";
 import { Github, Star, GitBranch, Terminal, Calendar, Code } from "lucide-react";
-import { motion } from "motion/react";
+import { useGithubDashboard } from "../../hooks/useGithub";
+
 export function GithubSection() {
   const { t } = useTranslation();
-  const [contributions, setContributions] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [githubStats, setGithubStats] = useState({
-    contributions: 0,
-    repos: 0,
-    stars: 0,
-    languages: "Loading..."
+  const { data: dashboard, isLoading, error } = useGithubDashboard();
+
+  if (isLoading) {
+    return (
+      <section className="w-full bg-slate-50 dark:bg-slate-900/40 py-24 border-y border-slate-100 dark:border-slate-900 flex justify-center items-center h-96">
+        <div className="text-slate-500 animate-pulse text-lg font-medium">Loading GitHub Data...</div>
+      </section>
+    );
+  }
+
+  if (error || !dashboard) {
+    return (
+      <section className="w-full bg-slate-50 dark:bg-slate-900/40 py-24 border-y border-slate-100 dark:border-slate-900 flex justify-center items-center h-96">
+        <div className="text-red-500 text-lg font-medium">Unable to load GitHub Data. Please try again later.</div>
+      </section>
+    );
+  }
+
+  const {
+    totalRepositories,
+    stars,
+    languages,
+    topRepositories,
+    contributions
+  } = dashboard;
+
+  const topLanguagesStr = languages.slice(0, 3).map((l: any) => l.name).join(', ') || 'N/A';
+  
+  const allDays = contributions?.weeks?.flatMap((w: any) => w.contributionDays) || [];
+  const recentDays = allDays.slice(-140).map((day: any, i: number) => {
+    let level = 0;
+    if (day.contributionLevel === 'FIRST_QUARTILE') level = 1;
+    else if (day.contributionLevel === 'SECOND_QUARTILE') level = 2;
+    else if (day.contributionLevel === 'THIRD_QUARTILE') level = 3;
+    else if (day.contributionLevel === 'FOURTH_QUARTILE') level = 4;
+    return { day: i, date: day.date, commits: day.contributionCount, level };
   });
-  const [popularRepos, setPopularRepos] = useState<any[]>([]);
-  const [contributionRange, setContributionRange] = useState<string>("Loading...");
 
-  useEffect(() => {
-    // 1. Fetch Contributions
-    fetch('https://github-contributions-api.deno.dev/nithish-dev-03.json')
-      .then(res => res.json())
-      .then(data => {
-        const allDays = data.contributions.flat();
-        
-        const total = allDays.reduce((sum: number, day: any) => sum + day.contributionCount, 0);
-        setGithubStats(prev => ({ ...prev, contributions: total }));
-        
-        if (allDays.length > 0) {
-          const first = new Date(allDays[0].date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
-          const last = new Date(allDays[allDays.length - 1].date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
-          setContributionRange(`${first} - ${last}`);
-        }
-        
-        const recentDays = allDays.slice(-140);
-        const mapped = recentDays.map((day: any, i: number) => {
-          let level = 0;
-          if (day.contributionLevel === 'FIRST_QUARTILE') level = 1;
-          else if (day.contributionLevel === 'SECOND_QUARTILE') level = 2;
-          else if (day.contributionLevel === 'THIRD_QUARTILE') level = 3;
-          else if (day.contributionLevel === 'FOURTH_QUARTILE') level = 4;
-          return { day: i, date: day.date, commits: day.contributionCount, level };
-        });
-        setContributions(mapped);
-        setLoading(false);
-      })
-      .catch(console.error);
-
-    const headers = import.meta.env.VITE_GITHUB_TOKEN 
-      ? { Authorization: `token ${import.meta.env.VITE_GITHUB_TOKEN}` } 
-      : {};
-
-    // 2. Fetch Profile Info
-    fetch('https://api.github.com/users/nithish-dev-03', { headers })
-      .then(res => res.json())
-      .then(data => {
-        setGithubStats(prev => ({ ...prev, repos: data.public_repos + (data.total_private_repos || 0) }));
-      })
-      .catch(console.error);
-
-    // 3. Fetch Repositories
-    fetch('https://api.github.com/user/repos?per_page=100&sort=pushed&affiliation=owner', { headers })
-      .then(res => {
-        if (!res.ok) {
-           // Fallback to public endpoint if token is invalid or missing 'repo' scope, or not provided
-           return fetch('https://api.github.com/users/nithish-dev-03/repos?per_page=100&sort=pushed', { headers }).then(r => r.json());
-        }
-        return res.json();
-      })
-      .then((repos: any[]) => {
-        const ownRepos = repos.filter(repo => !repo.fork);
-        const totalStars = ownRepos.reduce((sum: number, repo: any) => sum + repo.stargazers_count, 0);
-        
-        const langMap: Record<string, number> = {};
-        ownRepos.forEach(repo => {
-          if (repo.language) {
-            langMap[repo.language] = (langMap[repo.language] || 0) + 1;
-          }
-        });
-        const sortedLangs = Object.entries(langMap).sort((a, b) => b[1] - a[1]).slice(0, 3).map(l => l[0]);
-        
-        setGithubStats(prev => ({ 
-          ...prev, 
-          stars: totalStars, 
-          languages: sortedLangs.join(', ') || 'N/A' 
-        }));
-        
-        const sortedRepos = [...ownRepos].sort((a, b) => b.stargazers_count - a.stargazers_count);
-        const colorMap: Record<string, string> = {
-          TypeScript: 'bg-blue-500',
-          JavaScript: 'bg-yellow-500',
-          Dart: 'bg-cyan-500',
-          HTML: 'bg-orange-500',
-          CSS: 'bg-indigo-500',
-          Python: 'bg-green-500'
-        };
-        
-        setPopularRepos(
-          sortedRepos.map(repo => ({
-            name: repo.name,
-            desc: repo.description || 'No description provided.',
-            language: repo.language || 'Markdown',
-            color: colorMap[repo.language] || 'bg-slate-500',
-            stars: repo.stargazers_count,
-            forks: repo.forks_count,
-            url: repo.html_url,
-            isPrivate: repo.private
-          }))
-        );
-      })
-      .catch(console.error);
-  }, []);
+  const firstDate = allDays.length > 0 ? new Date(allDays[0].date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : '';
+  const lastDate = allDays.length > 0 ? new Date(allDays[allDays.length - 1].date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : '';
+  const contributionRange = allDays.length > 0 ? `${firstDate} - ${lastDate}` : '';
 
   const statItems = [
-    { key: "contributions", val: `${githubStats.contributions}`, icon: Calendar, color: "text-emerald-500 bg-emerald-500/10" },
-    { key: "repositories", val: `${githubStats.repos}`, icon: GitBranch, color: "text-blue-500 bg-blue-500/10" },
-    { key: "stars", val: `${githubStats.stars}`, icon: Star, color: "text-amber-500 bg-amber-500/10" },
-    { key: "languages", val: githubStats.languages, icon: Code, color: "text-purple-500 bg-purple-500/10" },
+    { key: "contributions", val: `${contributions?.totalContributions || 0}`, icon: Calendar, color: "text-emerald-500 bg-emerald-500/10" },
+    { key: "repositories", val: `${totalRepositories}`, icon: GitBranch, color: "text-blue-500 bg-blue-500/10" },
+    { key: "stars", val: `${stars}`, icon: Star, color: "text-amber-500 bg-amber-500/10" },
+    { key: "languages", val: topLanguagesStr, icon: Code, color: "text-purple-500 bg-purple-500/10" },
   ];
+
+  const colorMap: Record<string, string> = {
+    TypeScript: 'bg-blue-500',
+    JavaScript: 'bg-yellow-500',
+    Dart: 'bg-cyan-500',
+    HTML: 'bg-orange-500',
+    CSS: 'bg-indigo-500',
+    Python: 'bg-green-500'
+  };
 
   return (
     <section
@@ -195,33 +140,29 @@ export function GithubSection() {
               <div className="flex items-center justify-between text-xs font-semibold text-slate-500 dark:text-slate-400 mb-6">
                 <span>{contributionRange}</span>
                 <span className="font-mono text-emerald-600 dark:text-emerald-400">
-                  {githubStats.contributions} {t("github.stats.contributions")}
+                  {contributions?.totalContributions || 0} {t("github.stats.contributions")}
                 </span>
               </div>
 
               {/* Grid cell layout */}
               <div className="grid grid-flow-col grid-rows-7 gap-1.5 overflow-x-auto pb-4 no-scrollbar">
-                {loading ? (
-                  <div className="text-sm text-slate-500 w-full col-span-full py-4 text-center">Loading actual contributions...</div>
-                ) : (
-                  contributions.map((cell) => (
-                    <div
-                      key={cell.day}
-                      title={`${cell.commits} commits on ${cell.date}`}
-                      className={`h-3 w-3 rounded-sm transition-all hover:scale-125 cursor-pointer ${
-                        cell.level === 0
-                          ? "bg-slate-100 dark:bg-slate-800/60"
-                          : cell.level === 1
-                          ? "bg-emerald-200 dark:bg-emerald-900/80"
-                          : cell.level === 2
-                          ? "bg-emerald-300 dark:bg-emerald-700"
-                          : cell.level === 3
-                          ? "bg-emerald-400 dark:bg-emerald-500"
-                          : "bg-emerald-500 dark:bg-emerald-400"
-                      }`}
-                    />
-                  ))
-                )}
+                {recentDays.map((cell: any) => (
+                  <div
+                    key={cell.day}
+                    title={`${cell.commits} commits on ${cell.date}`}
+                    className={`h-3 w-3 rounded-sm transition-all hover:scale-125 cursor-pointer ${
+                      cell.level === 0
+                        ? "bg-slate-100 dark:bg-slate-800/60"
+                        : cell.level === 1
+                        ? "bg-emerald-200 dark:bg-emerald-900/80"
+                        : cell.level === 2
+                        ? "bg-emerald-300 dark:bg-emerald-700"
+                        : cell.level === 3
+                        ? "bg-emerald-400 dark:bg-emerald-500"
+                        : "bg-emerald-500 dark:bg-emerald-400"
+                    }`}
+                  />
+                ))}
               </div>
 
               {/* Legend bar */}
@@ -247,7 +188,7 @@ export function GithubSection() {
           </h3>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-h-[500px] overflow-y-auto pr-2 custom-scrollbar">
-            {popularRepos.map((repo) => (
+            {topRepositories.map((repo: any) => (
               <div
                 key={repo.name}
                 className="p-5 rounded-xl border border-slate-200 dark:border-white/5 bg-white dark:bg-slate-900 shadow-sm flex flex-col justify-between gap-4 group hover:border-blue-500/20 transition-all h-full"
@@ -272,14 +213,14 @@ export function GithubSection() {
                       <Github className="h-4.5 w-4.5" />
                     </a>
                   </div>
-                  <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed font-sans line-clamp-2" title={repo.desc}>
-                    {repo.desc}
+                  <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed font-sans line-clamp-2" title={repo.description}>
+                    {repo.description || 'No description provided.'}
                   </p>
                 </div>
                 <div className="flex items-center gap-4 text-xs font-mono text-slate-400 mt-2">
                   <div className="flex items-center gap-1.5">
-                    <span className={`h-2.5 w-2.5 rounded-full ${repo.color}`} />
-                    <span>{repo.language}</span>
+                    <span className={`h-2.5 w-2.5 rounded-full ${colorMap[repo.language || ''] || 'bg-slate-500'}`} />
+                    <span>{repo.language || 'Markdown'}</span>
                   </div>
                   <div className="flex items-center gap-1">
                     <Star className="h-3.5 w-3.5 text-amber-500" />
