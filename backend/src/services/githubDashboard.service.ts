@@ -19,7 +19,7 @@ export const getDashboard = async () => {
   ]);
 
   const sortedRepos = [...repos].sort((a: any, b: any) => b.stargazers_count - a.stargazers_count);
-  const topRepositories = sortedRepos.slice(0, 6).map(repo => ({
+  const topRepositories = sortedRepos.map(repo => ({
     name: repo.name,
     description: repo.description,
     language: repo.language,
